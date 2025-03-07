@@ -11,8 +11,15 @@ env.config();
 
 const GOOGLE_RECAPTCHA_SECRET_KEY = process.env.GOOGLE_RECAPTCHA_SECRET_KEY;
 
-const corsOptions = {
-  origin: ["http://localhost:5173"],
+let whitelist = ['https://jonathanzacarias.com', 'http://www.jonathanzacarias.com'];
+let corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true,
 };
 
