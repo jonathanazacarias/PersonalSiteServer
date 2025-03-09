@@ -11,30 +11,33 @@ env.config();
 
 const GOOGLE_RECAPTCHA_SECRET_KEY = process.env.GOOGLE_RECAPTCHA_SECRET_KEY;
 
-let whitelist = [
+
+// CORS stuff
+const whitelist = [
   "https://jonathanzacarias.com/",
   "https://www.jonathanzacarias.com/",
   "http://localhost:5173/",
 ];
 
+const headers = [
+  "Content-Type",
+  "Authorization",
+  "Access-Control-Allow-Methods",
+  "Access-Control-Request-Headers",
+];
+
 let corsOptions = {
   origin: whitelist,
-  // credentials: true,
-  methods: "GET, POST, PUT, DELETE, OPTIONS",
-  allowedHeaders: "Content-Type,Authorization",
+  allowedHeaders: headers,
+  credentials: true,
+  enablePreflight: true,
 };
 
 app.use(cors(corsOptions));
+// set preflight options for cors
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
-
-// set preflight options for cors
-app.options("*", (req, res) => {
-  res.header("Access-Control-Allow-Origin", whitelist);
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.sendStatus(200);
-});
 
 // create reusable transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({
