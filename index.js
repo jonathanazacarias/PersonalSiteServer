@@ -20,13 +20,21 @@ let whitelist = [
 let corsOptions = {
   origin: whitelist,
   // credentials: true,
-  methods: "GET,POST",
+  methods: "GET, POST, PUT, DELETE, OPTIONS",
   allowedHeaders: "Content-Type,Authorization",
 };
 
 app.use(cors(corsOptions));
 
 app.use(express.json());
+
+// set preflight options for cors
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.sendStatus(200);
+});
 
 // create reusable transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({
