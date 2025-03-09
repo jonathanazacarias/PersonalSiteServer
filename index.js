@@ -14,9 +14,9 @@ const GOOGLE_RECAPTCHA_SECRET_KEY = process.env.GOOGLE_RECAPTCHA_SECRET_KEY;
 
 // CORS stuff
 const whitelist = [
-  "https://jonathanzacarias.com/",
-  "https://www.jonathanzacarias.com/",
-  "http://localhost:5173/",
+  "https://jonathanzacarias.com",
+  "https://www.jonathanzacarias.com",
+  "http://localhost:5173",
 ];
 
 const headers = [
@@ -27,7 +27,7 @@ const headers = [
 ];
 
 let corsOptions = {
-  origin: whitelist,
+  origin: "https://jonathanzacarias.com",
   allowedHeaders: headers,
   credentials: true,
   enablePreflight: true,
