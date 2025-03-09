@@ -26,6 +26,8 @@ const headers = [
   "Access-Control-Request-Headers",
 ];
 
+// for some reason putting whitelist in for origin does not work
+// so have to add the actual list in for origin.
 let corsOptions = {
   origin: [
     "https://jonathanzacarias.com",
