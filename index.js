@@ -27,7 +27,11 @@ const headers = [
 ];
 
 let corsOptions = {
-  origin: "https://jonathanzacarias.com",
+  origin: [
+    "https://jonathanzacarias.com",
+    "https://www.jonathanzacarias.com",
+    "http://localhost:5173",
+  ],
   allowedHeaders: headers,
   credentials: true,
   enablePreflight: true,
