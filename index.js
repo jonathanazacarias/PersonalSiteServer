@@ -99,7 +99,6 @@ app.post("/verify", async (req, res) => {
         `https://www.google.com/recaptcha/api/siteverify?secret=${GOOGLE_RECAPTCHA_SECRET_KEY}&response=${captchaToken}`
       );
       console.log(result);
-      res.set("Access-Control-Allow-Origin", "https://jonathanzacarias.com");
       res.send(result.data.success).status(200);
     } catch (error) {
       res.sendStatus(500);
