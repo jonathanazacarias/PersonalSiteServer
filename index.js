@@ -30,7 +30,7 @@ app.use(express.json());
 
 // set preflight options for cors
 app.options("*", (req, res) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", whitelist);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.sendStatus(200);
