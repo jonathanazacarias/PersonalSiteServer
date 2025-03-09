@@ -35,7 +35,10 @@ let corsOptions = {
 
 app.use(cors(corsOptions));
 // set preflight options for cors
-app.options("*", cors(corsOptions));
+app.options("*", (req, res) => {
+  console.log("Made it to set preflight headers");
+  res.setHeader('Access-Control-Allow-Origin', whitelist);
+});
 
 app.use(express.json());
 
