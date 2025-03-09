@@ -15,7 +15,7 @@ let whitelist = ['https://jonathanzacarias.com', 'https://www.jonathanzacarias.c
 
 let corsOptions = {
   origin: "*",
-  // credentials: true,
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
