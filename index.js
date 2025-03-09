@@ -11,11 +11,11 @@ env.config();
 
 const GOOGLE_RECAPTCHA_SECRET_KEY = process.env.GOOGLE_RECAPTCHA_SECRET_KEY;
 
-let whitelist = ['https://jonathanzacarias.com', 'https://www.jonathanzacarias.com'];
+let whitelist = ['https://jonathanzacarias.com/', 'https://www.jonathanzacarias.com/', 'http://localhost:5173/'];
 
 let corsOptions = {
-  origin: "*",
-  // credentials: true,
+  origin: whitelist,
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
