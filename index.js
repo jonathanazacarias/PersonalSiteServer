@@ -36,13 +36,13 @@ let corsOptions = {
 app.use(cors(corsOptions));
 // set preflight options for cors
 app.options("*", (req, res) => {
-  // console.log(req.origin);
-  // const origin = req.origin;
-  // let responseOrigin = "";
-  // if(whitelist.includes(origin)) {
-  //   responseOrigin = whitelist[whitelist.indexOf(origin)];
-  // }
-  res.setHeader('Access-Control-Allow-Origin', 'https://jonathanzacarias.com');
+  console.log(req.origin);
+  const origin = req.origin;
+  let responseOrigin = "";
+  if(whitelist.includes(origin)) {
+    responseOrigin = whitelist[whitelist.indexOf(origin)];
+  }
+  res.setHeader('Access-Control-Allow-Origin', responseOrigin);
 });
 
 app.use(express.json());
