@@ -27,7 +27,7 @@ const headers = [
 ];
 
 let corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: whitelist,
   allowedHeaders: headers,
   credentials: true,
   enablePreflight: true,
@@ -36,8 +36,13 @@ let corsOptions = {
 app.use(cors(corsOptions));
 // set preflight options for cors
 app.options("*", (req, res) => {
-  console.log("Made it to set preflight headers");
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+  console.log(req.origin);
+  const origin = req.origin;
+  let responseOrigin = "";
+  if(whitelist.includes(origin)) {
+    responseOrigin = whitelist[whitelist.indexOf(origin)];
+  }
+  res.setHeader('Access-Control-Allow-Origin', responseOrigin);
 });
 
 app.use(express.json());
