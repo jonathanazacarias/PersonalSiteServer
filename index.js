@@ -27,7 +27,7 @@ const headers = [
 ];
 
 let corsOptions = {
-  origin: whitelist,
+  origin: 'http://localhost:5173/',
   allowedHeaders: headers,
   credentials: true,
   enablePreflight: true,
