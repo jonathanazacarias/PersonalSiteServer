@@ -3,7 +3,7 @@ import cors from "cors";
 import nodemailer from "nodemailer";
 import env from "dotenv";
 import axios from "axios";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const app = express();
 const port = 3000;
@@ -11,11 +11,17 @@ env.config();
 
 const GOOGLE_RECAPTCHA_SECRET_KEY = process.env.GOOGLE_RECAPTCHA_SECRET_KEY;
 
-let whitelist = ['https://jonathanzacarias.com/', 'https://www.jonathanzacarias.com/', 'http://localhost:5173/'];
+let whitelist = [
+  "https://jonathanzacarias.com/",
+  "https://www.jonathanzacarias.com/",
+  "http://localhost:5173/",
+];
 
 let corsOptions = {
   origin: whitelist,
   // credentials: true,
+  methods: "GET,POST",
+  allowedHeaders: "Content-Type,Authorization",
 };
 
 app.use(cors(corsOptions));
@@ -38,7 +44,7 @@ app.get("/", (req, res) => {
         <h1>Welcome</h1>
 
     `);
-    console.log("Welcome log");
+  console.log("Welcome log");
 });
 
 app.post("/contact", (req, res) => {
@@ -72,22 +78,22 @@ app.post("/contact", (req, res) => {
 
 app.post("/verify", async (req, res) => {
   console.log(`Verification request made. \n ${req} \n`);
-    if(req.body.captchaToken) {
-      const captchaToken = req.body.captchaToken;
-      try {
-        const result = await axios.post(
-          `https://www.google.com/recaptcha/api/siteverify?secret=${GOOGLE_RECAPTCHA_SECRET_KEY}&response=${captchaToken}`,
-        );
-        console.log(result);
-        res.set('Access-Control-Allow-Origin', 'https://jonathanzacarias.com').send(result.data.success).status(200);
-      } catch (error) {
-        res.sendStatus(500);
-      }
-      
-    } else {
-      res.sendStatus(403);
+  if (req.body.captchaToken) {
+    const captchaToken = req.body.captchaToken;
+    try {
+      const result = await axios.post(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${GOOGLE_RECAPTCHA_SECRET_KEY}&response=${captchaToken}`
+      );
+      console.log(result);
+      res.set("Access-Control-Allow-Origin", "https://jonathanzacarias.com");
+      res.send(result.data.success).status(200);
+    } catch (error) {
+      res.sendStatus(500);
     }
-})
+  } else {
+    res.sendStatus(403);
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}.`);
