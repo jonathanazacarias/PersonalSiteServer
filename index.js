@@ -14,7 +14,7 @@ const GOOGLE_RECAPTCHA_SECRET_KEY = process.env.GOOGLE_RECAPTCHA_SECRET_KEY;
 let whitelist = ['https://jonathanzacarias.com', 'https://www.jonathanzacarias.com'];
 
 let corsOptions = {
-  origin: "https://jonathanzacarias.com",
+  origin: "*",
   // credentials: true,
 };
 
