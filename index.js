@@ -70,12 +70,14 @@ app.post("/contact", (req, res) => {
 });
 
 app.post("/verify", async (req, res) => {
+  console.log(`Verification request made. \n ${req} \n`)
     if(req.body.captchaToken) {
       const captchaToken = req.body.captchaToken;
       try {
         const result = await axios.post(
           `https://www.google.com/recaptcha/api/siteverify?secret=${GOOGLE_RECAPTCHA_SECRET_KEY}&response=${captchaToken}`,
         );
+        console.log(result)
         res.send(result.data.success).status(200);
       } catch (error) {
         res.sendStatus(500);
