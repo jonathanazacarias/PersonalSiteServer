@@ -11,7 +11,6 @@ env.config();
 
 const GOOGLE_RECAPTCHA_SECRET_KEY = process.env.GOOGLE_RECAPTCHA_SECRET_KEY;
 
-
 // CORS stuff
 const whitelist = [
   "https://jonathanzacarias.com",
@@ -45,10 +44,10 @@ app.options("*", (req, res) => {
   console.log(req.origin);
   const origin = req.origin;
   let responseOrigin = "";
-  if(whitelist.includes(origin)) {
+  if (whitelist.includes(origin)) {
     responseOrigin = whitelist[whitelist.indexOf(origin)];
   }
-  res.setHeader('Access-Control-Allow-Origin', responseOrigin);
+  res.setHeader("Access-Control-Allow-Origin", responseOrigin);
 });
 
 app.use(express.json());
@@ -67,7 +66,23 @@ const transporter = nodemailer.createTransport({
 app.get("/", (req, res) => {
   res.send(`
         <h1>Welcome</h1>
+        <p></p>
     `);
+});
+
+app.get("/download", (req, res) => {
+  let requestedResource = req.body.resource;
+  if (requestedResource) {
+    switch (requestedResource) {
+      case "resume":
+        res.download(`public/downloadable/Jonathan_Zacarias_Resume.pdf`).status(200);
+        break;
+      default:
+        break;
+    }
+  } else {
+    res.sendStatus(404);
+  }
 });
 
 app.post("/contact", (req, res) => {
