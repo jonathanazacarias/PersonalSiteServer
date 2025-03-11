@@ -68,7 +68,6 @@ app.get("/", (req, res) => {
   res.send(`
         <h1>Welcome</h1>
     `);
-  console.log("Welcome log");
 });
 
 app.post("/contact", (req, res) => {
