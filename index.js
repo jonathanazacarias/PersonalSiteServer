@@ -78,6 +78,7 @@ app.post("/download", (req, res) => {
 
     switch (requestedResource) {
       case "resume":
+        console.log("made it to resume")
         res
           .download(
             `${basePath}/Jonathan_Zacarias_Resume.pdf`,
