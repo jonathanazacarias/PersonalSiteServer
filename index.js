@@ -70,7 +70,7 @@ app.get("/", (req, res) => {
     `);
 });
 
-app.get("/download", (req, res) => {
+app.post("/download", (req, res) => {
   console.log(req.body);
   if (req.body.resource) {
     let requestedResource = req.body.resource;
