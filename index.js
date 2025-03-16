@@ -71,17 +71,15 @@ app.get("/", (req, res) => {
 });
 
 app.post("/download", (req, res) => {
-  console.log(req.body);
   if (req.body.resource) {
     let requestedResource = req.body.resource;
-    // switch (requestedResource) {
-    //   case "resume":
-    //     res.download(`public/downloadable/Jonathan_Zacarias_Resume.pdf`).status(200);
-    //     break;
-    //   default:
-    //     break;
-    // }
-    console.log("download requested");
+    switch (requestedResource) {
+      case "resume":
+        res.download(`public/downloadable/Jonathan_Zacarias_Resume.pdf`).status(200);
+        break;
+      default:
+        break;
+    }
   } else {
     res.sendStatus(404);
   }
