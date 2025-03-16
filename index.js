@@ -79,8 +79,7 @@ app.post("/download", (req, res) => {
     switch (requestedResource) {
       case "resume":
         console.log("made it to resume")
-        res
-          .download(
+        res.download(
             `${basePath}/Jonathan_Zacarias_Resume.pdf`,
             "Jonathan_Zacarias_Resume.pdf",
             options,
@@ -89,8 +88,7 @@ app.post("/download", (req, res) => {
                 res.status(404).send("File not found!");
               }
             }
-          )
-          .status(200);
+          );
         break;
       default:
         break;
