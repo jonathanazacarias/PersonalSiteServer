@@ -71,8 +71,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/download", (req, res) => {
-  let requestedResource = req.body.resource;
-  if (requestedResource) {
+  console.log(req.body);
+  if (req.body.resource) {
+    let requestedResource = req.body.resource;
     // switch (requestedResource) {
     //   case "resume":
     //     res.download(`public/downloadable/Jonathan_Zacarias_Resume.pdf`).status(200);
@@ -116,7 +117,6 @@ app.post("/contact", (req, res) => {
 });
 
 app.post("/verify", async (req, res) => {
-  console.log(`Verification request made. \n ${req} \n`);
   if (req.body.captchaToken) {
     const captchaToken = req.body.captchaToken;
     try {
