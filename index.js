@@ -73,9 +73,23 @@ app.get("/", (req, res) => {
 app.post("/download", (req, res) => {
   if (req.body.resource) {
     let requestedResource = req.body.resource;
+    const basePath = "public/downloadable";
+    const options = { headers: { "Content-Type": "application/pdf" } };
+
     switch (requestedResource) {
       case "resume":
-        res.download(`public/downloadable/Jonathan_Zacarias_Resume.pdf`).status(200);
+        res
+          .download(
+            `${basePath}/Jonathan_Zacarias_Resume.pdf`,
+            "Jonathan_Zacarias_Resume.pdf",
+            options,
+            (err) => {
+              if (err) {
+                res.status(404).send("File not found!");
+              }
+            }
+          )
+          .status(200);
         break;
       default:
         break;
