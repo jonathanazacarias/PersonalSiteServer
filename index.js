@@ -73,13 +73,14 @@ app.get("/", (req, res) => {
 app.get("/download", (req, res) => {
   let requestedResource = req.body.resource;
   if (requestedResource) {
-    switch (requestedResource) {
-      case "resume":
-        res.download(`public/downloadable/Jonathan_Zacarias_Resume.pdf`).status(200);
-        break;
-      default:
-        break;
-    }
+    // switch (requestedResource) {
+    //   case "resume":
+    //     res.download(`public/downloadable/Jonathan_Zacarias_Resume.pdf`).status(200);
+    //     break;
+    //   default:
+    //     break;
+    // }
+    console.log("download requested");
   } else {
     res.sendStatus(404);
   }
